@@ -154,6 +154,21 @@ window.portfolioData = {
       skills: ["Stakeholder Engagement", "Documentation", "Communication", "Information Gathering", "Problem Solving", "Process Adherence"]
     },
     {
+      company: "Elysium Healthcare – Arbury Court",
+      role: "Healthcare Worker",
+      location: "Liverpool, UK",
+      start: "May 2023",
+      end: "May 2024",
+      summary: "Supported care delivery while maintaining structured clinical records and data that informed care planning, reporting and audits.",
+      highlights: [
+        "Maintained and recorded structured clinical observations and care notes to inform care planning and management reporting.",
+        "Supported therapeutic routines while monitoring physical and mental health indicators, escalating risks and ensuring data capture for audits.",
+        "Communicated observations and handovers to multidisciplinary teams to improve accuracy of patient records and care continuity.",
+        "Ensured compliance with clinical governance and safeguarding protocols, supporting quality and data governance requirements."
+      ],
+      skills: ["Clinical Documentation", "Data Capture", "Risk Escalation", "Multidisciplinary Communication", "Clinical Governance", "Safeguarding"]
+    },
+    {
       company: "NHS",
       role: "Information Governance & Records Management Experience",
       location: "",
