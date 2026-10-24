@@ -204,7 +204,7 @@
     if (typedEl && phrases.length) {
       var prefix = has(D.typedPrefix) ? D.typedPrefix : "";
       if (prefixEl) prefixEl.textContent = prefix;
-      line.setAttribute("aria-label", (prefix + " " + phrases[0]).trim());
+      line.setAttribute("aria-label", has(D.tagline) ? D.tagline : (prefix + " " + phrases[0]).trim());
       if (reduceMotion || phrases.length === 1) {
         typedEl.textContent = phrases[0];
         var cur = $(".cursor", line); if (cur) cur.hidden = true;

@@ -15,9 +15,9 @@ window.portfolioData = {
   alsoKnownAs: "Adus Michael",
   title: "Healthcare Business Analyst | HealthTech Professional | Process Improvement & Digital Transformation",
   location: "Liverpool, United Kingdom",
-  tagline: "I turn business problems into smarter solutions.",
+  tagline: "I help healthcare organisations improve processes, implement digital solutions and make data-driven decisions — through evidence-based business analysis.",
   heroIntro:
-    "I bring together healthcare knowledge, stakeholder engagement, requirements engineering, and data-driven thinking to support informed decision-making and successful change initiatives.",
+    "Through evidence-based business analysis — bringing together healthcare knowledge, stakeholder engagement, requirements engineering and data-driven thinking.",
   photo: "assets/images/profile.jpg",
   photoAlt: "Portrait of Michael Solomon",
 
@@ -27,8 +27,8 @@ window.portfolioData = {
      heroTags: the three small labels floating around the photo
      marquee: words in the scrolling strip under the hero */
   heroStatus: "Open to opportunities",
-  typedPrefix: "I turn business problems into",
-  typedPhrases: ["smarter solutions.", "clear requirements.", "better processes.", "evidence-based decisions."],
+  typedPrefix: "I help healthcare organisations",
+  typedPhrases: ["improve processes.", "implement digital solutions.", "make data-driven decisions."],
   heroTags: ["Healthcare BA", "HealthTech", "Process Improvement"],
   marquee: [
     "Requirements Engineering", "Stakeholder Analysis", "Process Mapping", "AS-IS / TO-BE",
