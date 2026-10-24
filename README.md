@@ -69,6 +69,10 @@ Almost everything is in **`assets/js/data.js`**. Open it on GitHub (click the fi
 | Professional title | `title` |
 | Tagline & hero text | `tagline`, `heroIntro` |
 | Hero stats (3+ years etc.) | `heroStats` |
+| Green status pill ("Open to opportunities") | `heroStatus` |
+| Typewriter line and its rotating endings | `typedPrefix`, `typedPhrases` |
+| Tags floating around your photo | `heroTags` |
+| Scrolling skills strip | `marquee` |
 | Highlights strip | `highlights` |
 | Bio | `aboutShort`, `aboutLong`, `aboutPillars` |
 | Skills | `competencies`, `capabilityMatrix` |

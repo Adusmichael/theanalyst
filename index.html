@@ -63,7 +63,7 @@
           <li><a href="#contact">Contact</a></li>
         </ul>
         <div class="nav-mobile-extra">
-          <a class="btn btn-primary btn-block" data-href="resume" download>Download CV</a>
+          <a class="btn btn-primary btn-block" data-href="resume" target="_blank" rel="noopener" data-field="resumeButtonText">View CV</a>
           <div class="social-row">
             <a data-href="linkedin" target="_blank" rel="noopener">LinkedIn</a>
             <a data-href="github" target="_blank" rel="noopener">GitHub</a>
@@ -82,7 +82,7 @@
           <svg class="i-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
           <svg class="i-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.5A8.5 8.5 0 0 1 9.5 3.5a8.5 8.5 0 1 0 11 11z"/></svg>
         </button>
-        <a class="btn btn-primary btn-sm hide-sm" data-href="resume" download data-field="resumeButtonText">Download CV</a>
+        <a class="btn btn-primary btn-sm hide-sm" data-href="resume" target="_blank" rel="noopener" data-field="resumeButtonText">View CV</a>
         <button class="icon-btn menu-btn" id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav">
           <span></span><span></span>
         </button>
@@ -94,40 +94,55 @@
 
     <!-- ============================== HERO ============================== -->
     <section class="hero" id="home">
+      <span class="blob b1" aria-hidden="true"></span>
+      <span class="blob b2" aria-hidden="true"></span>
       <div class="container hero-grid">
         <div class="hero-copy">
-          <p class="eyebrow reveal"><span class="dot" aria-hidden="true"></span><span data-field="location">Liverpool, United Kingdom</span></p>
-          <h1 class="hero-name reveal"><span data-field="name">Michael Solomon</span></h1>
-          <p class="hero-aka reveal">also known as <span data-field="alsoKnownAs">Adus Michael</span></p>
-          <p class="hero-title reveal" data-field="title">Healthcare Business Analyst</p>
-          <p class="hero-tagline reveal" data-field="tagline">I turn business problems into smarter solutions.</p>
-          <p class="hero-intro reveal" data-field="heroIntro"></p>
-          <div class="hero-cta reveal">
+          <p class="status-pill"><i aria-hidden="true"></i><span id="hero-status">Open to opportunities</span> · <span data-field="location">Liverpool, United Kingdom</span></p>
+          <h1 class="hero-name" id="hero-name"><span data-field="name">Michael Solomon</span></h1>
+          <p class="hero-aka">also known as <span data-field="alsoKnownAs">Adus Michael</span></p>
+          <p class="hero-title" data-field="title">Healthcare Business Analyst</p>
+          <p class="typed-line" id="typed-line" aria-label="I turn business problems into smarter solutions.">
+            <span aria-hidden="true"><span id="typed-prefix">I turn business problems into</span> <span class="typed" id="typed"></span><span class="cursor">|</span></span>
+          </p>
+          <p class="hero-intro" data-field="heroIntro"></p>
+          <div class="hero-cta">
             <a class="btn btn-primary" href="#projects">View Projects
               <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-            <a class="btn btn-ghost" data-href="resume" download>
-              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
-              <span data-field="resumeButtonText">Download CV</span></a>
+            <a class="btn btn-ghost" data-href="resume" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/></svg>
+              <span data-field="resumeButtonText">View CV</span></a>
           </div>
-          <ul class="hero-links reveal">
+          <ul class="hero-links">
             <li><a data-href="linkedin" target="_blank" rel="noopener">LinkedIn ↗</a></li>
             <li><a data-href="github" target="_blank" rel="noopener">GitHub ↗</a></li>
             <li><a data-href="emailLink" data-field="email"></a></li>
           </ul>
         </div>
 
-        <figure class="hero-portrait reveal">
-          <div class="portrait-frame">
-            <img data-src="photo" data-alt="photoAlt" src="assets/images/profile.jpg" alt="Portrait of Michael Solomon" width="640" height="800" fetchpriority="high">
-          </div>
-          <dl class="hero-stats" id="hero-stats"></dl>
+        <div class="hero-visual">
+        <figure class="avatar-wrap">
+          <span class="avatar-ring" aria-hidden="true"></span>
+          <img class="photo" data-src="photo" data-alt="photoAlt" src="assets/images/profile.jpg" alt="Portrait of Michael Solomon" width="640" height="800" fetchpriority="high">
+          <span class="tag-float t1" id="tag1"></span>
+          <span class="tag-float t2" id="tag2"></span>
+          <span class="tag-float t3" id="tag3"></span>
         </figure>
-      </div>
-
-      <div class="container">
-        <ul class="highlights reveal" id="highlights" aria-label="Highlights"></ul>
+        <dl class="hero-stats" id="hero-stats"></dl>
+        </div>
       </div>
     </section>
+
+    <!-- Scrolling skills strip (edit "marquee" in data.js) -->
+    <div class="marquee" aria-label="Key skills">
+      <div class="track" id="marquee-track"></div>
+    </div>
+
+    <div class="container">
+      <ul class="highlights reveal" id="highlights" aria-label="Highlights"></ul>
+    </div>
+
+    <div id="glow" aria-hidden="true"></div>
 
     <!-- ============================== ABOUT ============================== -->
     <section class="section" id="about">
