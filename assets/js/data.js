@@ -287,12 +287,12 @@ window.portfolioData = {
      While "file" is "", the card shows "Coming soon" instead of a button. */
   artefactsProject: "Northlake Community Hospital – Specimen Tracking",
   artefacts: [
-    { title: "Stakeholder Register", text: "Who is affected, their interests, influence and engagement approach.", file: "" },
-    { title: "Power-Interest Matrix", text: "Stakeholders mapped by power and interest to plan engagement.", file: "" },
-    { title: "AS-IS Process Map", text: "The current specimen identification and tracking process.", file: "" },
-    { title: "TO-BE Process Map", text: "The proposed future-state process.", file: "" },
-    { title: "Business Case", text: "The case for change: options, benefits, costs and risks.", file: "" },
-    { title: "SDLC Overview", text: "How the solution moves from requirements to delivery.", file: "" }
+    { title: "Stakeholder Register", text: "Who is affected, their interests, influence and engagement approach.", file: "assets/documents/artefacts/01-Stakeholder-Register.pdf" },
+    { title: "Power-Interest Matrix", text: "Stakeholders mapped by power and interest to plan engagement.", file: "assets/documents/artefacts/02-Power-Interest-Matrix.pdf" },
+    { title: "AS-IS Process Map", text: "The current specimen identification and tracking process.", file: "assets/documents/artefacts/03-AS-IS-Process-Map.pdf" },
+    { title: "TO-BE Process Map", text: "The proposed future-state process.", file: "assets/documents/artefacts/04-TO-BE-Process-Map.pdf" },
+    { title: "Business Case", text: "The case for change: options, benefits, costs and risks.", file: "assets/documents/artefacts/05-Business-Case.pdf" },
+    { title: "SDLC Overview", text: "How the solution moves from requirements to delivery.", file: "assets/documents/artefacts/06-SDLC-Overview.pdf" }
   ],
 
   /* ---------------------------------------------- HOW I SOLVE PROBLEMS (5Q) */
