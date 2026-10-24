@@ -177,6 +177,82 @@
     renderContact();
   }
 
+  /* ------------------------------------------------------------ HERO animations */
+  function initHero() {
+    var el;
+
+    // status pill
+    if ((el = $("#hero-status"))) {
+      if (has(D.heroStatus)) el.textContent = D.heroStatus;
+      else { el.nextSibling && (el.nextSibling.textContent = ""); el.remove(); }
+    }
+
+    // name: split into letters that rise in one by one
+    if ((el = $("#hero-name")) && has(D.name)) {
+      var n = 0;
+      el.setAttribute("aria-label", D.name);
+      el.innerHTML = D.name.split(" ").map(function (word) {
+        return '<span class="w" aria-hidden="true">' + word.split("").map(function (c) {
+          return '<span class="ch" style="animation-delay:' + (150 + (n++) * 45) + 'ms">' + esc(c) + "</span>";
+        }).join("") + "</span>";
+      }).join(" ");
+    }
+
+    // typewriter line
+    var typedEl = $("#typed"), line = $("#typed-line"), prefixEl = $("#typed-prefix");
+    var phrases = has(D.typedPhrases) ? D.typedPhrases : [];
+    if (typedEl && phrases.length) {
+      var prefix = has(D.typedPrefix) ? D.typedPrefix : "";
+      if (prefixEl) prefixEl.textContent = prefix;
+      line.setAttribute("aria-label", (prefix + " " + phrases[0]).trim());
+      if (reduceMotion || phrases.length === 1) {
+        typedEl.textContent = phrases[0];
+        var cur = $(".cursor", line); if (cur) cur.hidden = true;
+      } else {
+        var pi = 0, ci = 0, deleting = false;
+        (function tick() {
+          var word = phrases[pi];
+          if (!deleting) {
+            ci++; typedEl.textContent = word.slice(0, ci);
+            if (ci === word.length) { deleting = true; return setTimeout(tick, 1900); }
+            setTimeout(tick, 65);
+          } else {
+            ci--; typedEl.textContent = word.slice(0, ci);
+            if (ci === 0) { deleting = false; pi = (pi + 1) % phrases.length; return setTimeout(tick, 350); }
+            setTimeout(tick, 32);
+          }
+        })();
+      }
+    } else if (line && has(D.tagline)) {
+      line.textContent = D.tagline;
+    }
+
+    // floating tags around the photo
+    (D.heroTags || []).slice(0, 3).forEach(function (t, i) { var tag = $("#tag" + (i + 1)); if (tag) tag.textContent = t; });
+
+    // scrolling marquee (content repeated twice for a seamless loop)
+    if ((el = $("#marquee-track"))) {
+      if (has(D.marquee)) {
+        var items = D.marquee.map(function (m) { return "<span>" + esc(m) + "</span>"; }).join("");
+        el.innerHTML = items + (reduceMotion ? "" : items.replace(/<span>/g, '<span aria-hidden="true">'));
+      } else { var mq = el.closest(".marquee"); if (mq) mq.hidden = true; }
+    }
+
+    // cursor glow (mouse/trackpad only)
+    var glow = $("#glow");
+    if (glow && !reduceMotion && window.matchMedia("(pointer: fine)").matches) {
+      var gx = 0, gy = 0, ticking = false;
+      window.addEventListener("mousemove", function (e) {
+        gx = e.clientX; gy = e.clientY;
+        if (!ticking) {
+          ticking = true;
+          requestAnimationFrame(function () { glow.style.left = gx + "px"; glow.style.top = gy + "px"; glow.classList.add("on"); ticking = false; });
+        }
+      }, { passive: true });
+      document.addEventListener("mouseleave", function () { glow.classList.remove("on"); });
+    } else if (glow) glow.remove();
+  }
+
   function projectCard(p, i) {
     return '<article class="card project-card reveal">' +
       '<div class="project-thumb"><img src="' + esc(url(p.image)) + '" alt="" loading="lazy" width="800" height="500"></div>' +
@@ -512,7 +588,7 @@
 
   /* ------------------------------------------------------------ boot */
   bindCommon();
-  if (PAGE === "home") { renderHome(); initForm(); }
+  if (PAGE === "home") { renderHome(); initHero(); initForm(); }
   if (PAGE === "case-study") renderCaseStudy();
   if (PAGE === "article") renderArticle();
   initTheme();

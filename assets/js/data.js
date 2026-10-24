@@ -21,7 +21,22 @@ window.portfolioData = {
   photo: "assets/images/profile.jpg",
   photoAlt: "Portrait of Michael Solomon",
 
-  /* Small stats shown beside the hero photo */
+  /* ---- HERO ANIMATIONS ----
+     heroStatus: text in the pill with the pulsing green dot (leave "" to hide it)
+     typedPrefix + typedPhrases: the typewriter line cycles through each phrase
+     heroTags: the three small labels floating around the photo
+     marquee: words in the scrolling strip under the hero */
+  heroStatus: "Open to opportunities",
+  typedPrefix: "I turn business problems into",
+  typedPhrases: ["smarter solutions.", "clear requirements.", "better processes.", "evidence-based decisions."],
+  heroTags: ["Healthcare BA", "HealthTech", "Process Improvement"],
+  marquee: [
+    "Requirements Engineering", "Stakeholder Analysis", "Process Mapping", "AS-IS / TO-BE",
+    "Gap Analysis", "Business Case Development", "UAT Support", "Information Governance",
+    "Digital Transformation", "Healthcare IT", "Agile & Scrum", "BPMN"
+  ],
+
+  /* Small stats shown in the hero */
   heroStats: [
     { value: "3+", label: "Years of experience" },
     { value: "6", label: "Portfolio projects" },
@@ -36,7 +51,7 @@ window.portfolioData = {
 
   /* ------------------------------------------------------------------ RESUME */
   resume: "assets/documents/Michael-Solomon-CV.pdf",
-  resumeButtonText: "Download CV",
+  resumeButtonText: "View CV",
 
   /* ---------------------------------------------------------------- FORMSPREE */
   formspreeEndpoint: "https://formspree.io/f/xdeekkqa",
