@@ -411,6 +411,61 @@
   }
 
   /* ------------------------------------------------------------ CASE STUDY page */
+  var CI = {
+    summary: '<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6M8 13h8M8 17h5"/>',
+    alert: '<path d="M12 3 2 20h20L12 3z"/><path d="M12 10v4M12 17v.01"/>',
+    target: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.5"/>',
+    users: '<circle cx="9" cy="8" r="3.2"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.5"/><path d="M16 14c2.8 0 5 2.2 5 5"/>',
+    flow: '<rect x="3" y="3" width="7" height="6" rx="1.5"/><rect x="14" y="15" width="7" height="6" rx="1.5"/><path d="M6.5 9v4a3 3 0 0 0 3 3H14"/>',
+    search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/>',
+    calendar: '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/>',
+    bulb: '<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V17h5v-1.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/>',
+    spark: '<path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/>',
+    list: '<path d="M9 6h12M9 12h12M9 18h12"/><path d="M4 6h.01M4 12h.01M4 18h.01"/>',
+    check: '<circle cx="12" cy="12" r="9"/><path d="m8 12.5 2.7 2.7L16 9.8"/>',
+    trend: '<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>',
+    shield: '<path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6z"/><path d="m9 12 2 2 4-4"/>',
+    gauge: '<path d="M4 18a8 8 0 1 1 16 0"/><path d="m12 18 4-5"/>',
+    cycle: '<path d="M20 12a8 8 0 0 1-14 5.3M4 12a8 8 0 0 1 14-5.3"/><path d="M18 3v4h-4M6 21v-4h4"/>',
+    box: '<path d="M21 8 12 3 3 8v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/>',
+    tag: '<path d="M3 12V4a1 1 0 0 1 1-1h8l9 9-9 9z"/><circle cx="8" cy="8" r="1.5"/>',
+    heart: '<path d="M12 20C7 16 3 12.6 3 8.5A4.5 4.5 0 0 1 12 7a4.5 4.5 0 0 1 9 1.5C21 12.6 17 16 12 20z"/>',
+    clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    eye: '<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+    down: '<path d="M12 5v14M6 13l6 6 6-6"/>',
+    up: '<path d="M12 19V5M6 11l6-6 6 6"/>',
+    x: '<circle cx="12" cy="12" r="9"/><path d="m9 9 6 6M15 9l-6 6"/>',
+    file: '<path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/>',
+    print: '<path d="M6 9V3h12v6M6 18H4a1 1 0 0 1-1-1v-6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v6a1 1 0 0 1-1 1h-2"/><rect x="6" y="14" width="12" height="7" rx="1"/>',
+    server: '<rect x="3" y="4" width="18" height="7" rx="1.5"/><rect x="3" y="13" width="18" height="7" rx="1.5"/><path d="M7 7.5h.01M7 16.5h.01"/>'
+  };
+  function ci(n, cls) { return '<svg class="' + (cls || "ci") + '" viewBox="0 0 24 24" aria-hidden="true">' + (CI[n] || CI.check) + "</svg>"; }
+
+  var QUAD = { mc: ["Manage closely", "q-mc"], ks: ["Keep satisfied", "q-ks"], ki: ["Keep informed", "q-ki"], mo: ["Monitor", "q-mo"] };
+
+  function csSection(id, num, icon, title, body, sub) {
+    return '<section class="cs-sec reveal" id="' + id + '"><header class="cs-sec-h"><span class="cs-num">' + pad(num) + "</span>" +
+      '<span class="cs-ic">' + ci(icon) + "</span><div><h2>" + esc(title) + "</h2>" + (sub ? '<p class="cs-sub">' + esc(sub) + "</p>" : "") + "</div></header>" + body + "</section>";
+  }
+
+  function flowDiagram(steps, mode) {
+    return '<ol class="flow flow-' + mode + '">' + steps.map(function (s, i) {
+      var cls = mode === "tobe" ? (s.n ? " is-new" : "") : (s.pain ? " is-pain" : "");
+      return '<li class="fstep' + cls + '"><span class="fn">' + (i + 1) + '</span><span class="ft">' + esc(s.t) + "</span>" +
+        (s.pain ? '<span class="fpain">' + ci("alert", "ci-s") + esc(s.pain) + "</span>" : "") +
+        (mode === "tobe" && s.n ? '<span class="fnew">New / automated</span>' : "") + "</li>";
+    }).join("") + "</ol>";
+  }
+
+  function stakeMap(list) {
+    var order = ["ks", "mc", "mo", "ki"];
+    return '<div class="smap"><span class="smap-y">Power / influence →</span><div class="smap-grid">' + order.map(function (q) {
+      var names = list.filter(function (s) { return s.q === q; });
+      return '<div class="sq ' + QUAD[q][1] + '"><strong>' + QUAD[q][0] + "</strong><ul>" +
+        (names.length ? names.map(function (s) { return "<li>" + esc(s.name) + "</li>"; }).join("") : '<li class="muted">—</li>') + "</ul></div>";
+    }).join("") + '</div><span class="smap-x">Interest →</span></div>';
+  }
+
   function renderCaseStudy() {
     var host = $("#case-study"); if (!host) return;
     var id = new URLSearchParams(location.search).get("id");
@@ -422,52 +477,138 @@
       host.innerHTML = '<section class="page-hero container"><a class="back-link" href="' + ROOT + 'index.html#projects">← All projects</a><h1>Case study not found</h1><p class="lead">This project may have been renamed. Please return to the projects list.</p></section>';
       return;
     }
-    var p = list[idx], cs = p.caseStudy || {};
+    var p = list[idx];
+    var C = (window.caseStudies || {})[p.id] || {};
     document.title = (p.shortTitle || p.title) + " — Case Study | " + (D.name || "");
-    var md = $('meta[name="description"]'); if (md) md.setAttribute("content", p.summary || "");
+    var md = $('meta[name="description"]'); if (md) md.setAttribute("content", C.summary || p.summary || "");
 
-    var steps = [
-      ["Business problem", cs.problem], ["Objective", cs.objective], ["Approach", cs.approach],
-      ["Analysis", cs.analysis], ["Findings", cs.findings], ["Recommendations", cs.recommendations],
-      ["Outcome", cs.outcome], ["Business impact", cs.impact]
-    ].filter(function (s) { return has(s[1]); });
+    var n = 0, secs = [], toc = [];
+    function add(id, icon, title, body, sub) { n++; secs.push(csSection(id, n, icon, title, body, sub)); toc.push([id, title]); }
+    function bullets(arr, icon, cls) {
+      return '<ul class="cs-bullets ' + (cls || "") + '">' + arr.map(function (t) { return "<li>" + ci(icon, "ci-s") + "<span>" + esc(t) + "</span></li>"; }).join("") + "</ul>";
+    }
 
-    var flow = steps.length
-      ? '<div class="cs-flow">' + steps.map(function (s) {
-          var body = Array.isArray(s[1]) ? "<ul>" + s[1].map(function (x) { return "<li>" + esc(x) + "</li>"; }).join("") + "</ul>" : "<p>" + esc(s[1]) + "</p>";
-          return '<section class="cs-step reveal"><h2>' + esc(s[0]) + "</h2>" + body + "</section>";
-        }).join("") + "</div>"
-      : '<div class="cs-skill-block reveal"><h2>What this project demonstrates</h2>' + chips(p.skills, true) + "</div>" +
-        '<div class="notice reveal"><h2>Full case study coming soon</h2><p>The detailed write-up — business problem, approach, analysis, findings and recommendations — is being prepared. In the meantime, feel free to <a href="' + ROOT + 'index.html#contact"><u>get in touch</u></a> to discuss this project.</p></div>';
+    if (has(C.summary)) add("summary", "summary", "Executive summary", '<div class="cs-callout">' + "<p>" + esc(C.summary) + "</p></div>");
 
-    var facts = [
-      ["Category", p.category], ["Context", p.context], ["My role", p.role], ["Methodology", p.methodology], ["Data source", p.dataSource]
-    ].filter(function (f) { return has(f[1]); }).map(function (f) { return "<div><dt>" + esc(f[0]) + "</dt><dd>" + esc(f[1]) + "</dd></div>"; }).join("");
-    if (has(p.tools)) facts += "<div><dt>Tools</dt><dd>" + chips(p.tools) + "</dd></div>";
-    if (steps.length && has(p.skills)) facts += "<div><dt>Skills demonstrated</dt><dd>" + chips(p.skills, true) + "</dd></div>";
-    var links = p.links || {};
-    var btns = "";
-    if (has(links.document)) btns += '<a class="btn btn-primary" href="' + esc(url(links.document)) + '" target="_blank" rel="noopener">' + ICON.download + "Supporting document</a>";
-    if (has(links.dashboard)) btns += '<a class="btn btn-ghost" href="' + esc(links.dashboard) + '" target="_blank" rel="noopener">View dashboard ↗</a>';
-    if (has(links.github)) btns += '<a class="btn btn-ghost" href="' + esc(links.github) + '" target="_blank" rel="noopener">View on GitHub ↗</a>';
+    if (has(C.problem)) add("problem", "alert", "Business problem",
+      '<p class="cs-text">' + esc(C.problem) + "</p>" +
+      (has(C.problemStats) ? '<div class="stat-row">' + C.problemStats.map(function (s) {
+        return '<div class="stat stat-red"><b>' + esc(s.v) + "</b><span>" + esc(s.k) + "</span></div>"; }).join("") + '</div><p class="cs-note">Case-study baseline data.</p>' : ""));
+
+    if (has(C.objectives)) add("objectives", "target", "Project objectives",
+      '<ol class="obj-grid">' + C.objectives.map(function (o, i) { return '<li><span class="obj-n">O' + (i + 1) + "</span><span>" + esc(o) + "</span></li>"; }).join("") + "</ol>");
+
+    if (has(C.stakeholders)) add("stakeholders", "users", "Stakeholder analysis",
+      '<div class="tbl-wrap"><table class="cs-table"><thead><tr><th>Stakeholder</th><th>Key interest</th><th>Influence</th><th>Interest</th><th>Engagement</th></tr></thead><tbody>' +
+      C.stakeholders.map(function (s) {
+        return "<tr><td><b>" + esc(s.name) + "</b></td><td>" + esc(s.interest) + '</td><td><span class="lv lv-' + s.power[0] + '">' + esc(s.power) +
+          '</span></td><td><span class="lv lv-' + s.int[0] + '">' + esc(s.int) + '</span></td><td><span class="qpill ' + QUAD[s.q][1] + '">' + QUAD[s.q][0] + "</span></td></tr>";
+      }).join("") + "</tbody></table></div>" +
+      '<h3 class="cs-h3">' + ci("users", "ci-s") + "Stakeholder map</h3>" + stakeMap(C.stakeholders));
+
+    if (C.asis && has(C.asis.steps)) add("asis", "flow", "Current state analysis (AS-IS)",
+      '<p class="cs-text">' + esc(C.asis.intro) + "</p>" +
+      (has(C.systems) ? '<div class="sys-row">' + C.systems.map(function (s) { return '<span class="sys">' + ci("server", "ci-s") + esc(s) + "</span>"; }).join("") + "</div>" : "") +
+      '<div class="diagram"><p class="diagram-l">AS-IS process' + (C.asis.steps.some(function (s) { return s.pain; }) ? ' · <span class="red">pain points marked</span>' : "") + "</p>" + flowDiagram(C.asis.steps, "asis") + "</div>" +
+      (has(C.asis.limitations) ? '<h3 class="cs-h3">' + ci("x", "ci-s") + "Limitations</h3>" + bullets(C.asis.limitations, "x", "b-red") : ""));
+
+    if (has(C.approach)) add("approach", "search", "Analysis approach",
+      '<div class="tech-grid">' + C.approach.map(function (a) { return '<div class="tech"><b>' + ci("check", "ci-s") + esc(a.name) + "</b><p>" + esc(a.how) + "</p></div>"; }).join("") + "</div>");
+
+    if (has(C.timeline)) add("timeline", "calendar", "BA activity timeline",
+      '<ol class="bat">' + C.timeline.map(function (t, i) { return '<li><span class="bat-n">' + (i + 1) + '</span><div><b>' + esc(t.t) + "</b><span>" + esc(t.d) + "</span></div></li>"; }).join("") + "</ol>");
+
+    if (has(C.findings)) add("findings", "bulb", "Key findings",
+      '<div class="find-grid">' + C.findings.map(function (f, i) { return '<div class="find"><span class="find-n">' + pad(i + 1) + "</span><p>" + esc(f) + "</p></div>"; }).join("") + "</div>");
+
+    if (C.tobe && has(C.tobe.steps)) add("tobe", "spark", "Future state design (TO-BE)",
+      '<p class="cs-text">' + esc(C.tobe.intro) + "</p>" +
+      '<div class="diagram diagram-good"><p class="diagram-l">TO-BE process · <span class="teal">new or automated steps highlighted</span></p>' + flowDiagram(C.tobe.steps, "tobe") + "</div>");
+
+    if (has(C.fr) || has(C.nfr)) add("requirements", "list", "Requirements summary",
+      (has(C.fr) ? '<h3 class="cs-h3">' + ci("list", "ci-s") + 'Functional requirements</h3><div class="tbl-wrap"><table class="cs-table"><thead><tr><th style="width:74px">ID</th><th>Requirement</th><th style="width:90px">Priority</th></tr></thead><tbody>' +
+        C.fr.map(function (r, i) { return '<tr><td class="mono">FR-' + pad(i + 1) + "</td><td>" + esc(r.t) + '</td><td><span class="mo mo-' + r.p.toLowerCase() + '">' + esc(r.p) + "</span></td></tr>"; }).join("") + "</tbody></table></div>" : "") +
+      (has(C.nfr) ? '<h3 class="cs-h3">' + ci("shield", "ci-s") + 'Non-functional requirements</h3><div class="tbl-wrap"><table class="cs-table"><thead><tr><th style="width:74px">ID</th><th style="width:150px">Category</th><th>Requirement</th></tr></thead><tbody>' +
+        C.nfr.map(function (r, i) { return '<tr><td class="mono">NFR-' + pad(i + 1) + "</td><td><b>" + esc(r.c) + "</b></td><td>" + esc(r.t) + "</td></tr>"; }).join("") + "</tbody></table></div>" : "") +
+      '<p class="cs-note">Priority uses MoSCoW (Must, Should, Could, Won\'t).</p>');
+
+    if (has(C.recommendations)) add("recommendations", "check", "Recommendations", bullets(C.recommendations, "check", "b-teal cs-recs"));
+
+    if (has(C.outcomes)) add("outcomes", "trend", "Expected outcomes",
+      '<div class="out-grid">' + C.outcomes.map(function (o) { return '<div class="out">' + ci(o.i || "check") + "<b>" + esc(o.t) + "</b></div>"; }).join("") + "</div>");
+
+    if (has(C.risks)) add("risks", "shield", "Risks & mitigation",
+      '<div class="tbl-wrap"><table class="cs-table"><thead><tr><th>Risk</th><th style="width:96px">Rating</th><th>Mitigation</th></tr></thead><tbody>' +
+      C.risks.map(function (r) { return "<tr><td><b>" + esc(r.r) + '</b></td><td><span class="lv lv-' + r.l[0] + '">' + esc(r.l) + "</span></td><td>" + esc(r.m) + "</td></tr>"; }).join("") + "</tbody></table></div>");
+
+    if (has(C.kpis)) add("kpis", "gauge", "KPIs & success measures",
+      '<div class="kpi-grid">' + C.kpis.map(function (k) {
+        return '<div class="kpi kpi-' + k.dir + '"><div class="kpi-top">' + ci(k.dir === "up" ? "up" : "down", "ci-s") + "<span>" + esc(k.m) + '</span></div><div class="kpi-v">' + esc(k.target) + "</div>" +
+          (has(k.base) && k.base !== "—" ? '<div class="kpi-b">Baseline: ' + esc(k.base) + "</div>" : "") + '<div class="kpi-h">' + esc(k.how) + "</div></div>";
+      }).join("") + "</div>" + (C.kpis.some(function (k) { return has(k.base) && k.base !== "—"; }) ? '<p class="cs-note">Baselines are case-study data.</p>' : '<p class="cs-note">Baselines to be measured before implementation; targets set with stakeholders.</p>'));
+
+    if (C.lifecycle && has(C.lifecycle.phases)) add("lifecycle", "cycle", C.lifecycle.title === "SDLC overview" ? "SDLC overview" : C.lifecycle.title,
+      '<ol class="sdlc">' + C.lifecycle.phases.map(function (ph, i) {
+        return '<li><div class="sdlc-h"><span>' + (i + 1) + "</span>" + esc(ph.n) + "</div><ul>" + ph.a.map(function (a) { return "<li>" + esc(a) + "</li>"; }).join("") + "</ul></li>";
+      }).join("") + "</ol>");
+
+    if (has(C.deliverables)) add("deliverables", "box", "Business analysis deliverables",
+      '<div class="del-grid">' + C.deliverables.map(function (d) {
+        if (has(d.file)) return '<a class="del" href="' + esc(url(d.file)) + '" target="_blank" rel="noopener">' + ci("file") + "<span><b>" + esc(d.t) + '</b><small>PDF · open ↗</small></span></a>';
+        return '<a class="del" href="#' + esc(d.anchor || "") + '">' + ci("file") + "<span><b>" + esc(d.t) + '</b><small>On this page ↓</small></span></a>';
+      }).join("") + "</div>");
+
+    var groups = has(C.skillGroups) ? C.skillGroups : [{ g: "Skills", items: p.skills || [] }];
+    add("skills", "tag", "Skills demonstrated",
+      '<div class="skill-groups">' + groups.map(function (g) { return '<div class="sg"><span class="sg-l">' + esc(g.g) + "</span>" + chips(g.items, true) + "</div>"; }).join("") + "</div>");
+
+    // overview infographic
+    var reqCount = (C.fr || []).length + (C.nfr || []).length;
+    var ov = [
+      ["tag", "Category", p.category],
+      ["users", "Stakeholders", (C.stakeholders || []).length + " groups"],
+      ["list", "Requirements", reqCount ? reqCount + " (" + (C.fr || []).length + " FR · " + (C.nfr || []).length + " NFR)" : "—"],
+      ["shield", "Risks assessed", (C.risks || []).length || "—"],
+      ["gauge", "KPIs", (C.kpis || []).length || "—"],
+      ["calendar", "BA activities", (C.timeline || []).length ? (C.timeline || []).length + " stages" : "—"]
+    ].map(function (o) { return '<div class="ov">' + ci(o[0], "ci-s") + "<span>" + o[1] + "</span><b>" + esc(String(o[2])) + "</b></div>"; }).join("");
 
     var prev = list[(idx - 1 + list.length) % list.length], next = list[(idx + 1) % list.length];
+    var docLink = (C.deliverables || []).filter(function (d) { return d.file; })[0];
 
     host.innerHTML =
-      '<section class="page-hero"><div class="container">' +
+      '<section class="cs-hero"><div class="container">' +
         '<a class="back-link" href="' + ROOT + 'index.html#projects">← All projects</a>' +
-        '<div class="page-meta reveal"><span class="chip">' + esc(p.category) + "</span>" + (has(p.context) ? '<span class="chip chip-soft">' + esc(p.context) + "</span>" : "") + "</div>" +
-        '<h1 class="reveal">' + esc(p.title) + "</h1>" +
-        '<p class="lead reveal">' + esc(p.summary) + "</p>" +
+        '<div class="page-meta"><span class="chip">' + esc(p.category) + "</span>" + (has(p.context) ? '<span class="chip chip-soft">' + esc(p.context) + "</span>" : "") + '<span class="chip chip-soft">Case study ' + pad(idx + 1) + " of " + pad(list.length) + "</span></div>" +
+        "<h1>" + esc(p.title) + "</h1>" +
+        '<p class="print-by">' + esc(D.name || "") + " · " + esc((D.title || "").split("|")[0].trim()) + "</p>" +
+        '<div class="cs-actions"><button class="btn btn-primary" type="button" id="cs-print">' + ci("print", "ci-btn") + "Download case study (PDF)</button>" +
+          '<a class="btn btn-ghost" href="#deliverables">' + ci("box", "ci-btn") + "View deliverables</a></div>" +
+        '<div class="cs-banner"><img src="' + esc(url(p.image)) + '" alt=""><div class="ov-grid">' + ov + "</div></div>" +
       "</div></section>" +
-      '<div class="container"><div class="cs-cover reveal"><img src="' + esc(url(p.image)) + '" alt=""></div>' +
-        '<div class="cs-layout"><div>' + flow + "</div>" +
-          '<aside class="card cs-facts reveal" aria-label="Project details"><dl>' + facts + "</dl>" + btns + "</aside>" +
-        "</div>" +
+      '<div class="container cs-wrap">' +
+        '<nav class="cs-toc" aria-label="Case study sections"><p>On this page</p><ol>' + toc.map(function (t) { return '<li><a href="#' + t[0] + '">' + esc(t[1]) + "</a></li>"; }).join("") + "</ol>" +
+          (docLink ? '<a class="btn btn-ghost btn-sm btn-block" href="#deliverables">Artefact PDFs</a>' : "") + "</nav>" +
+        '<div class="cs-main">' + secs.join("") + "</div>" +
+      "</div>" +
+      '<div class="container">' +
         (list.length > 1 ? '<nav class="cs-nav" aria-label="More case studies">' +
           '<a class="card" href="' + caseUrl(prev.id) + '"><small>← Previous</small><strong>' + esc(prev.shortTitle || prev.title) + "</strong></a>" +
           '<a class="card next" href="' + caseUrl(next.id) + '"><small>Next →</small><strong>' + esc(next.shortTitle || next.title) + "</strong></a></nav>" : "") +
       "</div>";
+
+    var pb = $("#cs-print"); if (pb) pb.addEventListener("click", function () { window.print(); });
+
+    // highlight current section in the TOC
+    if ("IntersectionObserver" in window) {
+      var links = $all(".cs-toc a[href^='#']");
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) {
+          if (e.isIntersecting) links.forEach(function (l) { l.classList.toggle("active", l.getAttribute("href") === "#" + e.target.id); });
+        });
+      }, { rootMargin: "-30% 0px -60% 0px" });
+      $all(".cs-sec").forEach(function (s) { io.observe(s); });
+    }
   }
 
   /* ------------------------------------------------------------ ARTICLE page */
