@@ -116,9 +116,26 @@ window.portfolioData = {
 
   /* --------------------------------------------------------------- EXPERIENCE
      start / end: e.g. "Jun 2024" and "Present". Leave "" to hide dates. */
-  journey: ["Healthcare Professional", "Information Governance", "Business Analysis Training", "Leadership & Mentoring"],
+  journey: ["Healthcare Professional", "Information Governance", "Business Analysis Training", "Leadership & Mentoring", "Health Business Analyst"],
 
   experience: [
+    {
+      company: "Amdari Inc",
+      role: "Health Business Analyst",
+      location: "United Kingdom",
+      start: "May 2026",
+      end: "Present",
+      summary: "Gathering and documenting healthcare requirements, analysing healthcare data, building KPI dashboards and leading UAT for healthcare systems and digital transformation projects.",
+      highlights: [
+        "Collaborated with healthcare stakeholders, clinical teams, and operational departments to gather, analyse, and document business requirements in BRDs and PRDs using Confluence, improving requirement clarity and reducing project rework by 30%.",
+        "Utilised Excel, SQL, and Power BI to analyse healthcare and operational datasets, develop performance reports, and generate actionable insights that supported evidence-based decision-making across multidisciplinary stakeholder groups.",
+        "Designed and maintained interactive Power BI dashboards to monitor healthcare KPIs, service delivery metrics, patient outcomes, resource utilisation, and project performance, improving visibility and reducing reporting preparation time by 35%.",
+        "Developed and maintained RACI matrices and stakeholder engagement plans to ensure clear accountability, effective governance, and successful execution of healthcare transformation projects.",
+        "Conducted business process mapping, workflow analysis, and gap assessments using Lucidchart and Visio to identify inefficiencies, streamline healthcare operations, and improve service delivery effectiveness.",
+        "Led User Acceptance Testing (UAT) activities for healthcare systems and digital transformation projects, creating test scenarios, managing defects, and validating solutions to ensure compliance with business and clinical requirements."
+      ],
+      skills: ["BRD / PRD", "Requirements Gathering", "Power BI", "SQL", "Excel", "Confluence", "RACI Matrix", "Process Mapping", "Gap Analysis", "UAT", "Lucidchart", "Visio"]
+    },
     {
       company: "Mersey Care NHS Foundation Trust",
       role: "Support Time and Recovery (STR) Mental Health Support Worker",
