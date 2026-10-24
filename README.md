@@ -59,6 +59,14 @@ If you ever use a different repository name or a custom domain, update the four 
 
 ---
 
+## Updating the site later (important)
+
+When you change the site, **upload every file that changed, in the same folder it lives in**. GitHub's upload keeps the folder paths, so drag the whole `assets` folder (not just `index.html`) and the files will be replaced in place.
+
+If you upload only `index.html`, the page will try to use old styles and scripts and will look broken.
+
+After uploading, if you still see the old version, press **Ctrl + F5** (Windows) or **Cmd + Shift + R** (Mac) to refresh without the cache. The links to `style.css` and the scripts end with `?v=...`. Changing that number in the three HTML files after big updates forces every visitor's browser to load the new files.
+
 ## 4. Update your information
 
 Almost everything is in **`assets/js/data.js`**. Open it on GitHub (click the file, then the pencil ✏️ icon), edit, then **Commit changes**.
