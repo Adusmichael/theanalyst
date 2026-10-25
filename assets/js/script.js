@@ -205,9 +205,17 @@
       var prefix = has(D.typedPrefix) ? D.typedPrefix : "";
       if (prefixEl) prefixEl.textContent = prefix;
       line.setAttribute("aria-label", has(D.tagline) ? D.tagline : (prefix + " " + phrases[0]).trim());
-      if (reduceMotion || phrases.length === 1) {
+      if (phrases.length === 1) {
         typedEl.textContent = phrases[0];
         var cur = $(".cursor", line); if (cur) cur.hidden = true;
+      } else if (reduceMotion) {
+        // Reduce Motion is on: no typing, but phrases still change with a gentle fade
+        var cur2 = $(".cursor", line); if (cur2) cur2.hidden = true;
+        var fi = 0; typedEl.textContent = phrases[0]; typedEl.classList.add("typed-fade");
+        setInterval(function () {
+          typedEl.classList.add("is-out");
+          setTimeout(function () { fi = (fi + 1) % phrases.length; typedEl.textContent = phrases[fi]; typedEl.classList.remove("is-out"); }, 450);
+        }, 3200);
       } else {
         var pi = 0, ci = 0, deleting = false;
         (function tick() {
